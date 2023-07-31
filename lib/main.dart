@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'routes/app_views.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,64 +12,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primaryContainer: const Color.fromARGB(255, 0, 44, 94),
+          primary: const Color.fromARGB(255, 0, 44, 94),
+          onSecondary: const Color.fromARGB(255, 0, 44, 94),
+          secondary: Colors.black,
         ),
+        // Define the default brightness and colors.
+        brightness: Brightness.light,
+        primaryColor: const Color.fromARGB(255, 54, 63, 149),
+        // fontFamily: 'Georgia',
+        textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
+        iconTheme: const IconThemeData(color: Color.fromARGB(255, 0, 44, 94)),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
+      title: 'Modelo em Flutter',
+      debugShowCheckedModeBanner: false,
+      getPages: AppViews.routes,
     );
   }
 }
