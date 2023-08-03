@@ -16,7 +16,7 @@ class _LoadViewState extends State<LoadView> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed(Routes.HOME);
+      Navigator.of(context).pushReplacementNamed(Routes.LOGIN);
     });
   }
 
