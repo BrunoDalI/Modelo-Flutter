@@ -25,4 +25,16 @@ class ShowSnackBarUtils {
       ),
     );
   }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackInfo(context, String text){
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Container(
+          alignment: Alignment.center,
+          child: Text(text)
+        ),
+        backgroundColor: Colors.blue
+      ),
+    );
+  }
 }
