@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:modeloflutter/controllers/login_controller.dart';
-
+import '../controllers/login_controller.dart';
 import '../models/login_model.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+  const LoginView({Key? key}) : super(key: key);
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -12,9 +11,10 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   var loginController = LoginController();
-  var loginModel = LoginModel();
+  final LoginModel loginModel = LoginModel();
   final _formkey = GlobalKey<FormState>();
-
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _LoginViewState extends State<LoginView> {
               child: Container(
                 width: 300,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(20.0),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -45,19 +45,28 @@ class _LoginViewState extends State<LoginView> {
                   ],
                 ),
                 child: Stack(
-                  clipBehavior: Clip.none, children: [
+                  clipBehavior: Clip.none,
+                  children: [
                     Card(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16.0, 116.0, 16.0, 16.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            loginController.fieldLogin(loginModel.login),
-                            const SizedBox(height: 10),
-                            loginController.fieldPass(loginModel.password),
-                            const SizedBox(height: 10),
-                            SizedBox(height: 50, child: loginController.loginButton(context, _formkey)),
-                          ],
+                      color:  Colors.white.withOpacity(0.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16.0, 116.0, 16.0, 16.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              loginController.fieldLogin(_usernameController),
+                              const SizedBox(height: 10),
+                              loginController.fieldPass(_passwordController),
+                              const SizedBox(height: 20),
+                              SizedBox(height: 50, width: 250, child: loginController.loginButton(context, _formkey, _usernameController, _passwordController),),
+                              const SizedBox(height: 10),
+                              loginController.newUserButton(context),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -71,8 +80,11 @@ class _LoginViewState extends State<LoginView> {
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.black, width: 3.0),
                         ),
-                        clipBehavior: Clip.antiAlias, // Define o corte anti-aliasing para a forma circular
-                        child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+                        clipBehavior: Clip.antiAlias,
+                        child: const CircleAvatar(
+                          radius: 50, 
+                          backgroundImage: AssetImage('assets/images/logo.png'),
+                        ),
                       ),
                     ),
                   ],
@@ -84,5 +96,4 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
-
 }

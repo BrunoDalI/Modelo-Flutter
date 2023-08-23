@@ -1,6 +1,13 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class LoginModel {
-  var login = TextEditingController();
-  var password = TextEditingController();
+  final String? id;
+  final TextEditingController? username;
+  final TextEditingController? password;
+
+  LoginModel({
+    this.id,
+    this.username,
+    this.password,
+  });
 }
